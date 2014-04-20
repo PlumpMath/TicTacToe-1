@@ -165,7 +165,6 @@ class Agent():
                     utility=x
                 else:
                     pass
-        print best
         return best
 
     def CheckWinLoss(self):

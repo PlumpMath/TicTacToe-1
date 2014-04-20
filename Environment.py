@@ -2,13 +2,13 @@ from Grid import *
 
 class Environment():
 
-    def __init__(self,Agent1,Agent2, chunkList=[]):
+    def __init__(self,Agent1,Agent2, chunk_display=[]):
         self.Agent1 = Agent1
         self.Agent2 = Agent2
         self.memory=[]
-        self.chunkList = chunkList
+        self.chunk_display = chunk_display
         
-        self.grid = Grid(3, 3, raw_chunks = self.chunkList)
+        self.grid = None
         
     def write(self,c,Agent):
         '''write the agent ID on a space c
@@ -44,8 +44,13 @@ class Environment():
         print "End of production"
 
     def printBoard (self):
-        self.grid.update(self.chunkList)
-        self.grid.show_current()
+        
+        if self.grid:
+            self.grid.update(self.chunk_display)
+            self.grid.show_current()
+            
+        else:
+            pass
                     
     def update(self):
         '''update will change all chunks in agents to match the environment'''

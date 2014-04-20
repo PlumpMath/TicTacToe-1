@@ -5,7 +5,7 @@ class Grid:
     Example Usage1: x = Grid(3, 3, chunk1_list)
     Example Usage2: x = Grid(3, 3, chunks = regularList).'''
     
-    def __init__(self, width=0, height=0, raw_chunks=None, chunks = [], current_grid = '', history = []):
+    def __init__(self, width=0, height=0, raw_chunks=None, chunks = [], current_grid = '', history = [], display_attr = ''):
         #position should be [x,y]
         self.width = width
         self.height = height
@@ -13,16 +13,14 @@ class Grid:
         self.chunks = chunks
         self.current_grid = current_grid
         self.history = history
-        
+        self.display_attr = display_attr
+                
         #Put the productions' 'raw' chunks' contents attributes into its own list.
         if self.raw_chunks:
-            for raw_chunk in self.raw_chunks:
-                self.chunks.append(raw_chunk.thingX)
+            self.update(self.raw_chunks)
         else:
             pass
-            
-        self.update(chunks)
-        
+                    
     def make_row(self, slice_start=0):
         '''Makes a single row based on width attribute.'''
                 
@@ -42,23 +40,24 @@ class Grid:
             
         return squares
             
-    def update(self, new_chunks=None, whatAttr='thingX'):
+    def update(self, raw_chunks = None):
         '''(re)generates a grid from width and height attributes, and potentially new chunk attributes inside.
         
         example usage1: grid_instance.update()
-        example usage2: grid_instance.update(recent_chunks)
+        example usage2: grid_instance.update(raw_chunks)
         
         '''
         
-        #If there's a new list of chunks as an argument, update those now.  Otherwise just use current
+        #If there's a new list of chunks as an argument, update those now.  Otherwise just skip.
         #chunks.
-        if new_chunks:
+        if raw_chunks:
             self.chunks = []
-            for chunks in new_chunks:
-                attr = getattr(chunks, whatAttr)
+        
+            for chunks in self.raw_chunks:
+                attr = getattr(chunks, self.display_attr)
                 self.chunks.append(attr)
-        else:
-            pass
+            else:
+                pass
         
         #Make some lists for row dimensions
         row_list = []

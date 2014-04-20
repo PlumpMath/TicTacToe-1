@@ -88,25 +88,22 @@ R1= Chunk3 (P2,"Row1","is_a","Row")
 #First create tic-tac-toe environment
 TTT= Environment.Environment(P2, P1)
 
-#Create a list for environment chunks
-chunk_display_list = []
 
 #Create chunks representing the board, add them to chunk display list.
-s1 = Chunk3(TTT,'s1', '_', 1, (1, 1), 0.0); chunk_display_list.append(s1)
-s2 = Chunk3(TTT,'s2', '_', 2, (2, 1), 0.0); chunk_display_list.append(s2)
-s3 = Chunk3(TTT,'s3', '_', 3, (3, 1), 0.0); chunk_display_list.append(s3)
-s4 = Chunk3(TTT,'s4', '_', 4, (1, 2), 0.0); chunk_display_list.append(s4)
-s5 = Chunk3(TTT,'s5', '_', 5, (2, 2), 0.0); chunk_display_list.append(s5)
-s6 = Chunk3(TTT,'s6', '_', 6, (3, 2), 0.0); chunk_display_list.append(s6)
-s7 = Chunk3(TTT,'s7', '_', 7, (1, 3), 0.0); chunk_display_list.append(s7)
-s8 = Chunk3(TTT,'s8', '_', 8, (2, 3), 0.0); chunk_display_list.append(s8)
-s9 = Chunk3(TTT,'s9', '_', 9, (3, 3), 0.0); chunk_display_list.append(s9)
+s1 = Chunk3(TTT,'s1', '_', 1, (1, 1), 0.0); TTT.chunk_display.append(s1)
+s2 = Chunk3(TTT,'s2', '_', 2, (2, 1), 0.0); TTT.chunk_display.append(s2)
+s3 = Chunk3(TTT,'s3', '_', 3, (3, 1), 0.0); TTT.chunk_display.append(s3)
+s4 = Chunk3(TTT,'s4', '_', 4, (1, 2), 0.0); TTT.chunk_display.append(s4)
+s5 = Chunk3(TTT,'s5', '_', 5, (2, 2), 0.0); TTT.chunk_display.append(s5)
+s6 = Chunk3(TTT,'s6', '_', 6, (3, 2), 0.0); TTT.chunk_display.append(s6)
+s7 = Chunk3(TTT,'s7', '_', 7, (1, 3), 0.0); TTT.chunk_display.append(s7)
+s8 = Chunk3(TTT,'s8', '_', 8, (2, 3), 0.0); TTT.chunk_display.append(s8)
+s9 = Chunk3(TTT,'s9', '_', 9, (3, 3), 0.0); TTT.chunk_display.append(s9)
 
-#Feed game chunks into the environment for updating.
-TTT.chunkList = chunk_display_list[:]
 
-#Feed that same list of chunks to the grid display.
-TTT.grid = Grid.Grid(3, 3, chunks=chunk_display_list)
+#Add display grid for easy viewing.
+TTT.grid = Grid.Grid(3, 3, raw_chunks = TTT.chunk_display[:], display_attr = 'thingX')
+
 
 #Some aliases for easier production definitions.
 goal='self.agent.goal'
