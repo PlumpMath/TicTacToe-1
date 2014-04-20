@@ -10,6 +10,9 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   intro
+   tutorial
 
 
 
@@ -20,3 +23,8 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+.. automodule:: Agent
+.. automodule:: Productions
+.. automodule:: Grid
+.. automodule:: Chunks
+.. automodule:: Environment
