@@ -117,8 +117,15 @@ clear_focus = 'focus=[]'
 p1_start = Production(P1,TTT,[goal+'=="start"'], [goal+'="assess"'])
 p1_qualify= Production(P1,TTT,[goal+'=="assess"',subgoal+'==""'], [subgoal+'="find blank"'])
 
-p1_assess = Production(P1,TTT,[goal+'=="assess"',subgoal+'=="find blank"'],
-            [focus+'=self.agent.returnMissing(None,None,"_","all")',subgoal+'="choose"'])
+
+p1_assess = Production(P1,TTT,[goal+'=="assess"',
+            subgoal+'=="find blank"'],
+
+            [focus+'=self.agent.returnMissing(None,None,"_","all")', 
+            'x = self.agent.searchByAttribute(self.agent.memory, "relation", "is_a")',
+            'y = self.agent.search(self.agent.memory, "Row", "is_a")',
+            'print "length of view----------", len(y)',
+             subgoal+'="choose"'])
 
 p1_choose = Production(P1,TTT,[goal+'=="assess"',subgoal+'=="choose"'],
                        [focus+'=(self.agent.assess('+focus+'))',goal+'="fill blank"'])

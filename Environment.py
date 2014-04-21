@@ -7,6 +7,7 @@ class Environment():
         self.Agent2 = Agent2
         self.memory=[]
         self.chunk_display = chunk_display
+        self.running = True
         
         self.grid = None
         
@@ -36,7 +37,7 @@ class Environment():
         self.Agent1.goal="start"
         self.Agent2.goal="wait"
         count=100
-        while count>=0 and (self.Agent1.returnMissing(None,None,"_")!=[]):
+        while count>=0 and (self.Agent1.returnMissing(None,None,"_")!=[]) and self.running == True:
             self.Agent1.SortProductions()
             self.Agent2.SortProductions()
             count-=1

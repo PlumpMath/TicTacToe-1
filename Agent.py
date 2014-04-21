@@ -183,6 +183,64 @@ class Agent():
                 break
                 #return True
         return False
+        
+    def searchByAttribute(self, chunkList, attribute, attributeContains):
+        '''returns a list of chunks matching specified arguments'''
+        returnList = []
+        
+        for i in chunkList:
+            #print i
+            attribute_contents = getattr(i, attribute)
+            try:
+                if str(attributeContains) in str(attribute_contents):
+                    #print attributeContains, "MATCHes to", attribute_contents
+                    returnList.append(i)
+                    
+                else:
+                    pass
+                    #print attribute_contents, "No match to", attributeContains
+            except:
+                pass
+                #print "not matching attribute"
+            
+            #     print attributeType, attributeContains, "Not found"
+            #         
+        return returnList
+        
+    def search(self, chunkList, *args):
+        '''Filters out a list of chunks by arguments.  Takes in a list of chunks, and returns the ones with attributes
+        containing the argument.'''
+        
+        returnList = []
+        matched = []
+        arguments = set(args)
+        
+        for chunk in chunkList:
+            all_attributes = dir(chunk)
+            matched = []
+            
+            for attributes in all_attributes:
+                candidate = getattr(chunk, attributes)
+                #print "candidate",candidate
+                
+                for a in args:
+                    if (str(a) in str(candidate)) and ("__" not in str(candidate)):
+                        matched.append(a)
+                        #print a, "===================== matches to ====================", candidate, matched
+                    else:
+                        pass
+            
+            matched = set(matched)
+            
+            if matched == arguments:
+                #print "THEY MATCH"
+                returnList.append(chunk)
+            else:
+                #print "NO MATCH"
+                pass
+                    
+                    
+        return returnList
             
     def SortProductions(self):
         if self.goal != "End":
@@ -201,6 +259,8 @@ class Agent():
                 FireNext.fire()
             else:
                 return "Stop!"
+        else:
+            return
 
     def alterChunk(self,ID,newInput):
         #finds an existing 'has_$' chunk and overrides it with new data
