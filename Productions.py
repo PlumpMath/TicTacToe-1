@@ -25,6 +25,9 @@ class Production():
             except IndexError as i:
                 print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, i, right_side)
                 
+            except SyntaxError as s:
+                print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, s, right_side)
+                
     def askLS(self):
         activation=True
         for item in self.LS:

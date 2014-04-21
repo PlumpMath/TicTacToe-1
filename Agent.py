@@ -9,6 +9,7 @@ class Agent():
         self.focus= focus_buffer
         self.my_move = 0
         self.view = view
+        self.effector = ""
         self.goal=""
         self.subgoal=""
         self.memory=[]
@@ -241,6 +242,14 @@ class Agent():
                     
                     
         return returnList
+        
+    def returnID(self, chunkList, n):
+        '''Returns ID of nth chunk in a list'''
+        
+        that_chunk = chunkList[n]
+                    
+        return getattr(that_chunk, 'ID')
+        
             
     def SortProductions(self):
         if self.goal != "End":

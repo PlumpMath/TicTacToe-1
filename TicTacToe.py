@@ -104,36 +104,50 @@ s9 = Chunk3(TTT,'s9', '_', 9, (3, 3), 0.0); TTT.chunk_display.append(s9)
 #Add display grid for easy viewing.
 TTT.grid = Grid.Grid(3, 3, raw_chunks = TTT.chunk_display[:], display_attr = 'thingX')
 
+#First some operators
+INTO = '='
+IS = '=='
 
 #Some aliases for easier production definitions.
 goal='self.agent.goal'
 subgoal='self.agent.subgoal'
 focus='self.agent.focus'
+view = 'self.agent.view'
 is_string = 'isinstance(self.agent.focus[-1:],str)'
 modify = 'self.e.write('
 clear_focus = 'focus=[]'
+check_rows = '"check rows"'
+sub_focus = 'self.agent.sub_focus'
+
+move = 'self.agent.effector'
+prime_target = 'self.agent.returnID(self.agent.focus, 0)'
+
+start = '"start"'
+nothing = '""'
+assess = '"assess"'
+
+check_rows = '"check rows"'
+find_blank = '"find blank"'
+get_id = 'self.agent.returnAttribute('
+
+#Some more sophisticated checks for rows
+check_row = 'self.agent.view = self.agent.search'
+
+view_count = 'len(self.agent.view)'
+view_status = 'print len(self.agent.view)'
 
 #And now actual productions.  First player 1.
-p1_start = Production(P1,TTT,[goal+'=="start"'], [goal+'="assess"'])
-p1_qualify= Production(P1,TTT,[goal+'=="assess"',subgoal+'==""'], [subgoal+'="find blank"'])
+x_01 = Production(P1,   TTT,    [goal + IS + start],  [goal + INTO + assess])
+x_02 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + INTO + find_blank ])
+x_03 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank ],     [ subgoal + INTO + check_rows ])
+
+#If the first row is about to be stolen, make a move.
+x_04 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + check_rows],    [check_row + '(self.e.memory, "_" , " 1)")',  view_status, subgoal + INTO + '"check row1"'])
+x_05 = Production(P1,   TTT,    [view_count + IS + '"1"', subgoal + IS + '"check row1"'],  [focus + INTO + view, goal + INTO + '"make move"'])
+
+x_06 = Production(P1,   TTT,    [goal + IS + '"make move"'],    [move + IS + prime_target,  modify + prime_target + '","' + '"self.e.Agent1"'])
 
 
-p1_assess = Production(P1,TTT,[goal+'=="assess"',
-            subgoal+'=="find blank"'],
-
-            [focus+'=self.agent.returnMissing(None,None,"_","all")', 
-            'x = self.agent.searchByAttribute(self.agent.memory, "relation", "is_a")',
-            'y = self.agent.search(self.agent.memory, "Row", "is_a")',
-            'print "length of view----------", len(y)',
-             subgoal+'="choose"'])
-
-p1_choose = Production(P1,TTT,[goal+'=="assess"',subgoal+'=="choose"'],
-                       [focus+'=(self.agent.assess('+focus+'))',goal+'="fill blank"'])
-
-p1_fillBlank = Production(P1,TTT, [goal+'=="fill blank"'], [ modify + focus + ',self.agent)', clear_focus,
-                    subgoal+'=""','self.agent.CheckWinLoss()', goal + '="wait"'])
-
-p1_wait = Production(P1,TTT,[goal+'=="wait"', is_string], ['self.agent.goal="assess"'])
                   
 #Now player 2
 p2_start = Production(P2,TTT,[goal+'=="start"'], [goal+'="assess"'])
