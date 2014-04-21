@@ -28,6 +28,9 @@ class Production():
             except SyntaxError as s:
                 print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, s, right_side)
                 
+            except NameError as n:
+                print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, n, right_side)
+                
     def askLS(self):
         activation=True
         for item in self.LS:

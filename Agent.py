@@ -36,15 +36,14 @@ class Agent():
         
         return empty_spaces
         
-    def random_choose(self):
-        '''I return a random choice from all possible choices.  Hopefully more useful functions will replace me.
+    def random_choose(self, object_list):
+        '''I return a random choice from all possible choices in a list.  Hopefully more useful functions will replace me.
         '''
-        all_choices = self.lookForSpace()
-        if len(all_choices) == 0:
+        if len(object_list) == 0:
             return None
         else:
-            choices = random.choice(all_choices)        
-            return choices
+            choice = random.choice(object_list)        
+            return choice
 
     def returnSqr(self,ID=None,att=None,Y=None,num="all"):
         '''returns the first chunk matching the description.
@@ -210,7 +209,7 @@ class Agent():
         
     def search(self, chunkList, *args):
         '''Filters out a list of chunks by arguments.  Takes in a list of chunks, and returns the ones with attributes
-        containing the argument.'''
+        containing **all** the arguments.'''
         
         returnList = []
         matched = []
@@ -243,12 +242,11 @@ class Agent():
                     
         return returnList
         
-    def returnID(self, chunkList, n):
+    def returnID(self, thatChunk):
         '''Returns ID of nth chunk in a list'''
         
-        that_chunk = chunkList[n]
-                    
-        return getattr(that_chunk, 'ID')
+        print getattr(thatChunk, 'ID')                    
+        return str(getattr(thatChunk, 'ID'))
         
             
     def SortProductions(self):

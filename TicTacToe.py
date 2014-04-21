@@ -4,7 +4,7 @@ from Agent import *
 
 #First initialize players and their respective chunks
 
-P1=Agent("X")
+P1=Agent("x")
 
 s1Loc= Chunk3 (P1,"s1@","s1","has_loc",(1,1))
 s2Loc= Chunk3 (P1,"s1@","s2","has_loc",(1,2))
@@ -41,7 +41,7 @@ C369= Chunk3 (P1,"C369",["s3","s6","s9"],"is_a","Column")
 D159= Chunk3 (P1,"D159",["s1","s5","s9"],"is_a","Diagonal")
 D357= Chunk3 (P1,"D357",["s3","s5","s7"],"is_a","Diagonal")
 
-P2=Agent("O")
+P2=Agent("o")
 s1Loc= Chunk3 (P2,"s1@","s1","has_loc",(1,1))
 s2Loc= Chunk3 (P2,"s1@","s2","has_loc",(1,2))
 s3Loc= Chunk3 (P2,"s1@","s3","has_loc",(1,3))
@@ -86,7 +86,7 @@ R1= Chunk3 (P2,"Row1","is_a","Row")
 '''
 
 #First create tic-tac-toe environment
-TTT= Environment.Environment(P2, P1)
+TTT= Environment.Environment(P1, P2)
 
 
 #Create chunks representing the board, add them to chunk display list.
@@ -105,8 +105,14 @@ s9 = Chunk3(TTT,'s9', '_', 9, (3, 3), 0.0); TTT.chunk_display.append(s9)
 TTT.grid = Grid.Grid(3, 3, raw_chunks = TTT.chunk_display[:], display_attr = 'thingX')
 
 #First some operators
-INTO = '='
+BECOMES = '='
 IS = '=='
+ADDED2 = '{0}.append({1})'
+nothing = '""'
+empty = '[]'
+zero = '0'
+one = '1'
+
 
 #Some aliases for easier production definitions.
 goal='self.agent.goal'
@@ -114,56 +120,88 @@ subgoal='self.agent.subgoal'
 focus='self.agent.focus'
 view = 'self.agent.view'
 is_string = 'isinstance(self.agent.focus[-1:],str)'
-modify = 'self.e.write('
-clear_focus = 'focus=[]'
 check_rows = '"check rows"'
-sub_focus = 'self.agent.sub_focus'
+subfocus = 'self.agent.sub_focus'
+
 
 move = 'self.agent.effector'
-prime_target = 'self.agent.returnID(self.agent.focus, 0)'
 
 start = '"start"'
-nothing = '""'
 assess = '"assess"'
+wait = '"wait"'
 
 check_rows = '"check rows"'
 find_blank = '"find blank"'
-get_id = 'self.agent.returnAttribute('
 
-#Some more sophisticated checks for rows
-check_row = 'self.agent.view = self.agent.search'
+#Some more sophisticated functions.  Note that searches all take zero as the list of objects to search in.  The search space.
+search2 = 'self.agent.search({0}, {1})'
+search3 = 'self.agent.search({0}, {1}, {2})'
+search4 = 'self.agent.search({0}, {1}, {2}, {3})'
+target1 = 'self.agent.returnID({0})'
+modify2 = 'self.e.write({0}, {1})'
+random1 = 'self.agent.random_choose({0})'
+more_than_zero = 'len({0}) > 0'
 
-view_count = 'len(self.agent.view)'
-view_status = 'print len(self.agent.view)'
+
+quantify1 = 'len({0})'
+say1    = 'print {0}' 
+world = 'self.e.memory'
+memory = 'self.agent.memory'
+
+agent1 = 'self.e.Agent1'
+agent2 = 'self.e.Agent2'
+agent1goal = 'self.e.Agent1.goal'
+agent2goal = 'self.e.Agent2.goal'
+
+
+end = 'self.e.running = False'
 
 #And now actual productions.  First player 1.
-x_01 = Production(P1,   TTT,    [goal + IS + start],  [goal + INTO + assess])
-x_02 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + INTO + find_blank ])
-x_03 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank ],     [ subgoal + INTO + check_rows ])
+x_01  =  Production(P1,   TTT,    [goal + IS + start], [goal + BECOMES + assess])
+x_08  =  Production(P1,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 
-#If the first row is about to be stolen, make a move.
-x_04 = Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + check_rows],    [check_row + '(self.e.memory, "_" , " 1)")',  view_status, subgoal + INTO + '"check row1"'])
-x_05 = Production(P1,   TTT,    [view_count + IS + '"1"', subgoal + IS + '"check row1"'],  [focus + INTO + view, goal + INTO + '"make move"'])
+#Look for any blank and randomly choose it.
+x_02  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + BECOMES + find_blank ])
+x_03  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank],  [focus + BECOMES + search2.format(world, '"_"'), subgoal + BECOMES + '"quantify"' ])
+x_04  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantify"', more_than_zero.format(focus)],
+                                                                                        [say1.format('"focus:"'), 
+                                                                                        say1.format(quantify1.format(focus)),
+                                                                                        subgoal + BECOMES + '"randomly choose"'])
 
-x_06 = Production(P1,   TTT,    [goal + IS + '"make move"'],    [move + IS + prime_target,  modify + prime_target + '","' + '"self.e.Agent1"'])
+#If its supposed to randomly choose, put your mark there.                                                                                        
+x_05  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + '"randomly choose"'], 
+                                    [subfocus + BECOMES + random1.format(focus),
+                                    move + BECOMES + target1.format(subfocus),
+                                    modify2.format(move, agent1),
+                                    subfocus + BECOMES + empty,
+                                    goal + BECOMES + wait,
+                                    agent2goal + BECOMES + start])
 
 
                   
 #Now player 2
-p2_start = Production(P2,TTT,[goal+'=="start"'], [goal+'="assess"'])
-p2_qualify= Production(P2,TTT,[goal+'=="assess"',subgoal+'==""'], [subgoal+'="find blank"'])
+o_01  =  Production(P2,   TTT,    [goal + IS + start], [goal + BECOMES + assess])
+o_08  =  Production(P2,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 
-p2_assess = Production(P2,TTT,[goal+'=="assess"',subgoal+'=="find blank"'],
-            [focus+'=self.agent.returnMissing(None,None,"_","all")',subgoal+'="choose"'])
+#Look for any blank and randomly choose it.
+o_02  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + BECOMES + find_blank ])
+o_03  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank],  [focus + BECOMES + search2.format(world, '"_"'), subgoal + BECOMES + '"quantify"' ])
+o_04  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantify"', more_than_zero.format(focus)],
+                                                                                        [say1.format('"focus:"'), 
+                                                                                        say1.format(quantify1.format(focus)),
+                                                                                        subgoal + BECOMES + '"randomly choose"'])
 
-p2_choose = Production(P2,TTT,[goal+'=="assess"',subgoal+'=="choose"'],
-                       ['x = self.agent.assess('+focus+')', focus+'=x',goal+'="fill blank"'])
+#If its supposed to randomly choose, put your mark there.                                                                                        
+o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"randomly choose"'], 
+                                    [subfocus + BECOMES + random1.format(focus),
+                                    move + BECOMES + target1.format(subfocus),
+                                    modify2.format(move, agent2),
+                                    subfocus + BECOMES + empty,
+                                    goal + BECOMES + wait,
+                                    agent1goal + BECOMES + start,])
 
-p2_fillBlank = Production(P2,TTT, [goal+'=="fill blank"'], [ modify + focus + ',self.agent)', clear_focus,
-                    subgoal+'=""','self.agent.CheckWinLoss()', goal + '="wait"'])
-
-p2_wait = Production(P2,TTT,[goal+'=="wait"', is_string], ['self.agent.goal="assess"'])
-
+#Check to see if game is over.
+o_06  =  Production(P2,   TTT,    [ search3.format(world, '"_"', '"s"') + IS + empty ],    [ end ])
 
 #Now, start production.
 TTT.startGame()
