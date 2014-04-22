@@ -1,76 +1,430 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <title>Tictactoe by mikebelanger</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/mikebelanger/TicTacToe">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/mikebelanger/TicTacToe/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/mikebelanger/TicTacToe/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-        <header>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
           <h1>Tictactoe</h1>
-          <h2>Production System for Tic Tac Toe.  By Ben Coyle, Ben Walsh Megan Ross and Mike Belanger</h2>
-        </header>
+          <p>Production System for Tic Tac Toe.  By Ben Coyle, Ben Walsh Megan Ross and Mike Belanger</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/mikebelanger">mikebelanger</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/mikebelanger/TicTacToe/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/mikebelanger/TicTacToe/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/mikebelanger/TicTacToe" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <h3>
+<a name="tic-tac-toe-documentation" class="anchor" href="#tic-tac-toe-documentation"><span class="octicon octicon-link"></span></a>Tic Tac Toe Documentation</h3>
 
-        <hr>
-
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>by Mike Belanger, Ben Coyle, Ben Walsh and Megan Ross</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="import-the-modules" class="anchor" href="#import-the-modules"><span class="octicon octicon-link"></span></a>Import the modules</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Ensure you have the files on your PYTHONPATH variable (or load them in IDLE).  From there, start a new python file and add:</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">Environment</span>
+<span class="kn">import</span> <span class="nn">Grid</span>
+<span class="kn">import</span> <span class="nn">Agent</span>
+</pre></div>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="initialize-objects" class="anchor" href="#initialize-objects"><span class="octicon octicon-link"></span></a>Initialize Objects</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+<p>You'll need at least one agent to populate the world.  To do this, create a new Agent, called <strong>P1</strong>, here, and give it the name <strong>X</strong>.</p>
 
-        <footer>
-          Tictactoe is maintained by <a href="https://github.com/mikebelanger">mikebelanger</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<div class="highlight highlight-python"><pre><span class="n">P1</span> <span class="o">=</span> <span class="n">Agent</span><span class="o">.</span><span class="n">Agent</span><span class="p">(</span><span class="s">"X"</span><span class="p">)</span>
+</pre></div>
 
-        
-      </div>
+<p>From there, we'll need to create some chunk3s for our agent.  Chunk3s are the standard unit of information that populates a world.  Let's use the example of a chunk3 for representing a square on the board, which has a location:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">s1Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+<p>The above says "make an object that belongs to player 1 (P1), whose ID is "s1@", name is "s1", and "has_loc" of the tuple (1,1) , ie the location of x=1, y = 1.  For any sort of game, a number of chunk3s are required.  Here is a list of other chunks to initialize:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">s1Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">s2Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s2"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">s3Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s3"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">s4Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s4"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">s5Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">s6Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s6"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">s7Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s7"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">s8Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s8"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">s9Loc</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1@"</span><span class="p">,</span><span class="s">"s9"</span><span class="p">,</span><span class="s">"has_loc"</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">s1S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1S"</span><span class="p">,</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s2S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s2S"</span><span class="p">,</span><span class="s">"s2"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s3S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s3S"</span><span class="p">,</span><span class="s">"s3"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s4S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s4S"</span><span class="p">,</span><span class="s">"s4"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s5S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s5S"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s6S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s6S"</span><span class="p">,</span><span class="s">"s6"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s7S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s7S"</span><span class="p">,</span><span class="s">"s7"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s8S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s8S"</span><span class="p">,</span><span class="s">"s8"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s9S</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s9S"</span><span class="p">,</span><span class="s">"s9"</span><span class="p">,</span><span class="s">"has_$"</span><span class="p">,</span><span class="s">"_"</span><span class="p">)</span>
+<span class="n">s1R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s1R"</span><span class="p">,</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"corner"</span><span class="p">)</span>
+<span class="n">s2R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s2R"</span><span class="p">,</span><span class="s">"s2"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"edge"</span><span class="p">)</span>
+<span class="n">s3R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s3R"</span><span class="p">,</span><span class="s">"s3"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"corner"</span><span class="p">)</span>
+<span class="n">s4R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s4R"</span><span class="p">,</span><span class="s">"s4"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"edge"</span><span class="p">)</span>
+<span class="n">s5R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s5R"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"center"</span><span class="p">)</span>
+<span class="n">s6R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s6R"</span><span class="p">,</span><span class="s">"s6"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"edge"</span><span class="p">)</span>
+<span class="n">s7R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s7R"</span><span class="p">,</span><span class="s">"s7"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"corner"</span><span class="p">)</span>
+<span class="n">s8R</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"s8R"</span><span class="p">,</span><span class="s">"s8"</span><span class="p">,</span><span class="s">"has_type"</span><span class="p">,</span><span class="s">"edge"</span><span class="p">)</span>
+<span class="n">R123</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"R123"</span><span class="p">,[</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"s2"</span><span class="p">,</span><span class="s">"s3"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Row"</span><span class="p">)</span>
+<span class="n">R456</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"R456"</span><span class="p">,[</span><span class="s">"s4"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"s6"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Row"</span><span class="p">)</span>
+<span class="n">R789</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"R789"</span><span class="p">,[</span><span class="s">"s7"</span><span class="p">,</span><span class="s">"s8"</span><span class="p">,</span><span class="s">"s9"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Row"</span><span class="p">)</span>
+<span class="n">C147</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"C147"</span><span class="p">,[</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"s4"</span><span class="p">,</span><span class="s">"s7"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Column"</span><span class="p">)</span>
+<span class="n">C258</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"C258"</span><span class="p">,[</span><span class="s">"s2"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"s8"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Column"</span><span class="p">)</span>
+<span class="n">C369</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"C369"</span><span class="p">,[</span><span class="s">"s3"</span><span class="p">,</span><span class="s">"s6"</span><span class="p">,</span><span class="s">"s9"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Column"</span><span class="p">)</span>
+<span class="n">D159</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"D159"</span><span class="p">,[</span><span class="s">"s1"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"s9"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Diagonal"</span><span class="p">)</span>
+<span class="n">D357</span><span class="o">=</span> <span class="n">Chunk3</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s">"D357"</span><span class="p">,[</span><span class="s">"s3"</span><span class="p">,</span><span class="s">"s5"</span><span class="p">,</span><span class="s">"s7"</span><span class="p">],</span><span class="s">"is_a"</span><span class="p">,</span><span class="s">"Diagonal"</span><span class="p">)</span>
+</pre></div>
+
+<p>Next, we need an environment for everything to live in. We should pass P1 (agent "X") into this environment too.  We've named the environment here "TTT".</p>
+
+<div class="highlight highlight-python"><pre><span class="n">TTT</span> <span class="o">=</span> <span class="n">Environment</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="create-chunks-representing-the-board-add-them-to-chunk-display-list" class="anchor" href="#create-chunks-representing-the-board-add-them-to-chunk-display-list"><span class="octicon octicon-link"></span></a>Create chunks representing the board, add them to chunk display list.</h3>
+
+<p>While the above could be considered P1's understanding of a board, we need to create the world's actual board chunks as well.  The below code initializes these world chunks. </p>
+
+<div class="highlight highlight-python"><pre><span class="n">s1</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s1'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s2'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s3'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+<span class="n">s4</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s4'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s4</span><span class="p">)</span>
+<span class="n">s5</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s5'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s5</span><span class="p">)</span>
+<span class="n">s6</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s6'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s6</span><span class="p">)</span>
+<span class="n">s7</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s7'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s7</span><span class="p">)</span>
+<span class="n">s8</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s8'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s8</span><span class="p">)</span>
+<span class="n">s9</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">TTT</span><span class="p">,</span><span class="s">'s9'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">);</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s9</span><span class="p">)</span>
+</pre></div>
+
+<p>Let's check out s1.  s1 requires an environment to live in(<code>TTT</code>), an ID (<code>'s1'</code>), what it has in it (<code>'_'</code>), an ordinal board position (<code>1</code>), a pair of coordinates (<code>(1, 1)</code>), and an activation (<code>(0.0)</code>).   <strong>Note:</strong> the <code>TTT.chunk_display.append(s1, s2, etc)</code> at the end of each line is optional, and only if you want to draw the results on a grid, for a later step.</p>
+
+<p><strong>Optional</strong>
+If you would like to display your results in a grid easily, we can do an additional step to enable this.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">TTT</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">raw_chunks</span> <span class="o">=</span> <span class="n">TTT</span><span class="o">.</span><span class="n">chunk_display</span><span class="p">[:],</span> <span class="n">display_attr</span> <span class="o">=</span> <span class="s">'thingX'</span><span class="p">)</span>
+</pre></div>
+
+<p>The above asks the environment TTT's grid attribute to become a grid (by default its None), make it 3 rows by 3 columns, feed a copy of its chunk_display into its raw_chunks parameter.  Finally, we ask that it fills the grid with the raw_chunks' 'thingX' attribute (under display_attr).</p>
+
+<h3>
+<a name="some-aliases-for-easier-production-definitions" class="anchor" href="#some-aliases-for-easier-production-definitions"><span class="octicon octicon-link"></span></a>Some aliases for easier production definitions.</h3>
+
+<p>Next, we'll add some variable definitions to easily command our productions.  These variables are essentially standins for some strings.  Those strings are actually just the string version of commands that the production system executes.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">goal</span><span class="o">=</span><span class="s">'self.agent.goal'</span>
+<span class="n">subgoal</span><span class="o">=</span><span class="s">'self.agent.subgoal'</span>
+<span class="n">focus</span><span class="o">=</span><span class="s">'self.agent.focus'</span>
+<span class="n">is_string</span> <span class="o">=</span> <span class="s">'isinstance(self.agent.focus[-1:],str)'</span>
+<span class="n">modify</span> <span class="o">=</span> <span class="s">'self.e.write('</span>
+<span class="n">clear_focus</span> <span class="o">=</span> <span class="s">'focus=[]'</span>
+</pre></div>
+
+<p>Now we'll actually invoke the productions.  Each production is a production object, which contains a single condition &gt;&gt; action pair.  Let's look at the first one we'll add, p1_start:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">p1_start</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="start"'</span><span class="p">],</span> <span class="p">[</span><span class="n">goal</span><span class="o">+</span><span class="s">'="assess"'</span><span class="p">])</span>
+</pre></div>
+
+<p>This new production instance needs an agent (<code>P1</code>), and an environment (<code>TTT</code>).  Next, we'll feed it its necessary conditions to fire (<code>[goal+'=="start"']</code>), and its corresponding action (<code>[goal+'="assess"']</code>).  Remember that <code>goal+</code> is the string meaning <code>'self.agent.goal'</code>, and gets added in front of the strings proceeding it.  Also note that within each list, multiple items can be added as well.  This means that a production can have more than one necessary condition to be true, and more than one action to fire.  Here's some more productions:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">p1_start</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="start"'</span><span class="p">],</span> <span class="p">[</span><span class="n">goal</span><span class="o">+</span><span class="s">'="assess"'</span><span class="p">])</span>
+<span class="n">p1_qualify</span><span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="assess"'</span><span class="p">,</span><span class="n">subgoal</span><span class="o">+</span><span class="s">'==""'</span><span class="p">],</span> <span class="p">[</span><span class="n">subgoal</span><span class="o">+</span><span class="s">'="find blank"'</span><span class="p">])</span>
+
+<span class="n">p1_assess</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="assess"'</span><span class="p">,</span><span class="n">subgoal</span><span class="o">+</span><span class="s">'=="find blank"'</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">focus</span><span class="o">+</span><span class="s">'=self.agent.returnMissing(None,None,"_","all")'</span><span class="p">,</span><span class="n">subgoal</span><span class="o">+</span><span class="s">'="choose"'</span><span class="p">])</span>
+
+<span class="n">p1_choose</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="assess"'</span><span class="p">,</span><span class="n">subgoal</span><span class="o">+</span><span class="s">'=="choose"'</span><span class="p">],</span>
+                       <span class="p">[</span><span class="n">focus</span><span class="o">+</span><span class="s">'=(self.agent.assess('</span><span class="o">+</span><span class="n">focus</span><span class="o">+</span><span class="s">'))'</span><span class="p">,</span><span class="n">goal</span><span class="o">+</span><span class="s">'="fill blank"'</span><span class="p">])</span>
+
+<span class="n">p1_fillBlank</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,</span> <span class="p">[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="fill blank"'</span><span class="p">],</span> <span class="p">[</span> <span class="n">modify</span> <span class="o">+</span> <span class="n">focus</span> <span class="o">+</span> <span class="s">',self.agent)'</span><span class="p">,</span> <span class="n">clear_focus</span><span class="p">,</span>
+                    <span class="n">subgoal</span><span class="o">+</span><span class="s">'=""'</span><span class="p">,</span><span class="s">'self.agent.CheckWinLoss()'</span><span class="p">,</span> <span class="n">goal</span> <span class="o">+</span> <span class="s">'="wait"'</span><span class="p">])</span>
+
+<span class="n">p1_wait</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">TTT</span><span class="p">,[</span><span class="n">goal</span><span class="o">+</span><span class="s">'=="wait"'</span><span class="p">,</span> <span class="n">is_string</span><span class="p">],</span> <span class="p">[</span><span class="s">'self.agent.goal="assess"'</span><span class="p">])</span>
+</pre></div>
+
+<p>Finally, we can start the simulation by invoking the startGame() function.</p>
+
+<h3>
+<a name="now-start-production--enjoy" class="anchor" href="#now-start-production--enjoy"><span class="octicon octicon-link"></span></a>Now, start production.  Enjoy!</h3>
+
+<div class="highlight highlight-python"><pre><span class="n">TTT</span><span class="o">.</span><span class="n">startGame</span><span class="p">()</span>
+</pre></div>
+
+<h4>
+<a name="data-system" class="anchor" href="#data-system"><span class="octicon octicon-link"></span></a>Data System</h4>
+
+<p>The tic-tac-toe production system relies heavily on the Chunk system.  This means that all meaningful information that both the agents and the environment understand are represented in chunks.  Here's a rough overview of how the chunk system implements Tic-Tac-Toe:</p>
+
+<p><img src="https://github.com/mikebelanger/TicTacToe/raw/master/doc/img/DataSystem.jpg" alt="/wiki/"></p>
+
+<p>The above shows how chunks create meaning for both the Tic Tac Toe board and the agent's understanding of the board.  This means that the Agent has access to the actual board units as chunks, as well as their own knowledge.  Their own chunks can be considered analogous to long-term memory.</p>
+
+<h4>
+<a name="productions" class="anchor" href="#productions"><span class="octicon octicon-link"></span></a>Productions</h4>
+
+<p>Each time the environment is started, it invokes each agent (currently limited to 2) to go through their respective production lists, and determine which production is true.  If so, it executes (fires).</p>
+
+<p><img src="https://github.com/mikebelanger/TicTacToe/raw/master/doc/img/AgentProduction.png" alt="/wiki/"></p>
+
+<p>Once the agent has exhausted all its possible firings, the environment invokes the second agent to do the same.  In the case of tic-tac-toe, Environment will continue to alternate between agents until the board is full, or an agent wins.  Whichever comes first.</p>
+
+<h4>
+<a name="production-syntax" class="anchor" href="#production-syntax"><span class="octicon octicon-link"></span></a>Production Syntax</h4>
+
+<p>The tic-tac-toe production system works on the basis of productions.  Each production contains a necessary condition, consequent action pair, an agent to fire them, and an environment for it to exist in.  These production instances look like this:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">some_production</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span><span class="s">'A'</span><span class="p">],</span> <span class="p">[</span><span class="s">'B'</span><span class="p">])</span>
+</pre></div>
+
+<p>Here, the example states that some_agent is invoked with condition 'A', they will do 'B'.  Note that the beauty of this system is you can specify (theoretically) unlimited conditions and actions.  For instance:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">another_production</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'C'</span><span class="p">],</span> <span class="p">[</span><span class="s">'D'</span><span class="p">])</span>
+</pre></div>
+
+<p>This says "if some_agent encounters 'A', <strong>and</strong> 'B' <strong>and</strong> 1, then fire 'D'."</p>
+
+<p>Conversely, this means that one antecedent condition can trigger multiple actions:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">another_production2</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span><span class="s">'A'</span><span class="p">],</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">])</span>
+</pre></div>
+
+<p>Here its stated that "if some_agent encounters 'A', fire 'D', 'E', and 'F'.".  So this production system is fairly flexible.  **Note:**the above examples are meant to be simple, and realistically, something more complex than letters will be required.  This is because the strings within those lists are actually python commands.  That said, its as easy as assigning a complex string like <code>A = 'self.agent.goal == "start"'</code>, and then pass <code>A</code> into the conditions list.</p>
+
+<h4>
+<a name="variables-in-the-productions" class="anchor" href="#variables-in-the-productions"><span class="octicon octicon-link"></span></a>Variables in the Productions</h4>
+
+<p>The production system is ultimately evaluating the strings of python system commands.  However, this does not mean users have to familiarize themselves with these commands.  The TicTacToe.py example provides variables which stand in for these rather esoteric strings.</p>
+
+<p>To use these variables, we should be familiar with how they're manipulated first.  It is important to understand that combining a string means adding a + between any statements:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">another_production3</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span><span class="s">'A'</span> <span class="o">+</span> <span class="s">'B'</span><span class="p">],</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">])</span>
+</pre></div>
+
+<p>Means that "If the system encounters 'AB', and do 'D', 'E', and 'F'".  </p>
+
+<p>Of course, there needs to be syntax for more complex expressions.  So the TicTacToe.py adheres to some other conventions:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">A</span> <span class="o">=</span> <span class="s">'B'</span>
+<span class="n">D</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">another_production4</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span> <span class="o">+</span> <span class="n">IS</span> <span class="o">+</span> <span class="s">'B'</span><span class="p">],</span> <span class="p">[</span><span class="n">D</span> <span class="n">BECOMES</span> <span class="s">'E'</span><span class="p">])</span>
+</pre></div>
+
+<p>This means that 'if the variable A (now a variable representing a string) <strong>has the contents of</strong> 'B', then variable D <strong>becomes</strong> 'E''.</p>
+
+<h4>
+<a name="format" class="anchor" href="#format"><span class="octicon octicon-link"></span></a>Format</h4>
+
+<p>Anything ending with a .format in the productions is essentially a function. In this example, someFunction is getting the variables A and D passed into it.  <strong>Note</strong> by convention, the amount of variables a function takes should be written at the end of the variable name.  Here, someFunction2 means that it takes two variables.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">A</span> <span class="o">=</span> <span class="s">'B'</span>
+<span class="n">D</span> <span class="o">=</span> <span class="s">'_'</span>
+<span class="n">someFunction2</span> <span class="o">=</span> <span class="s">'self.e.someFunction({0}, {1})'</span>
+
+<span class="n">another_production5</span> <span class="o">=</span> <span class="n">Production</span><span class="p">(</span><span class="n">some_agent</span><span class="p">,</span> <span class="n">some_environment</span><span class="p">,</span> <span class="p">[</span> <span class="n">someFunction2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="n">IS</span> <span class="o">+</span> <span class="s">'B_'</span> <span class="p">],</span> 
+
+<span class="p">[</span><span class="n">D</span> <span class="n">BECOMES</span> <span class="s">'E'</span><span class="p">])</span>
+</pre></div>
+
+<p>The above statement says 'if the result of someFunction2 using A, and D is 'B_', then D becomes 'E'.'  Note that one does not need to assign variables to test the result of something.  The above can test what happens to A, D, and evaluate it on one line.</p>
+
+<p>While most of your functions should be variabalized (see [[SuggestedVariables]]) its good to understand what these various functions do.  Here are the key functions, organized by module.</p>
+
+<h4>
+<a name="agent-module" class="anchor" href="#agent-module"><span class="octicon octicon-link"></span></a>Agent Module</h4>
+
+<div class="highlight highlight-python"><pre><span class="n">SortProductions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+<p>While the user will likely never work directly with this function, it should be noted how crucial it is for the system to run.  SortProductions sorts through all of the agent's potential productions for truth values, and executes the action which is true.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">random_choose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_list</span><span class="p">):</span>
+</pre></div>
+
+<p>random_choose takes in a list of objects and returns 1 random entry.  While this is not ideal cognitively, this is often useful for testing something.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">utility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">anID</span><span class="p">):</span>
+</pre></div>
+
+<p>While this is specific to Tic-Tac-Toe, its algorithm is likely re-purposable to other things.  This takes the ID of a Chunk and returns its 'utility' value in integer form.  A 'utility' value can be thought of as an objective rating of overall benefit of a certain thing.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">assess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">aList</span><span class="p">):</span>
+</pre></div>
+
+<p>Like utility, assess is somewhat specific to Tic-Tac-Toe.  However, with some modifications it could be re-purposed for larger playing spaces.  Assess takes in a list of strings, and decides which space is the most optimal and returns one of them.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">searchByAttribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chunkList</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">attributeContains</span><span class="p">):</span>
+</pre></div>
+
+<p>This function takes in a list of objects (typically chunks, here as <strong>chunkList</strong>) and searches through the object's specified attribute (<strong>attribute</strong>) for anything matching <strong>attributeContains</strong>, and returns a list of the matching objects.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">stripChunk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chunkList</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+</pre></div>
+
+<p>This takes in a list of chunks, and returns a list of a string version of the objects' specified <em>attribute</em>.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chunkList</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+
+<p>This nifty utility takes in a list of objects (typically chunks) and returns all chunks who have attributes contents matching <strong>all</strong> of the specified arguments <strong>args</strong>.</p>
+
+<h4>
+<a name="production-module" class="anchor" href="#production-module"><span class="octicon octicon-link"></span></a>Production Module</h4>
+
+<div class="highlight highlight-python"><pre><span class="n">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</pre></div>
+
+<p>While this particular method may seem self-explanatory, it should be mentioned that it can be used to fire individual productions.  This is useful for debugging purposes.  ie)</p>
+
+<div class="highlight highlight-python"><pre><span class="n">ProductionInstance</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
+</pre></div>
+
+<div class="highlight highlight-python"><pre><span class="n">askLS</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+<p>While the user will likely never interact with this function, it is important to recognize its significance.  This function takes in each 'left side' item of the production, and returns it if the LS is true.</p>
+
+<h4>
+<a name="environment-module" class="anchor" href="#environment-module"><span class="octicon octicon-link"></span></a>Environment Module</h4>
+
+<p>The environment module can take manage two agents, and is linked to the productions if specified.  There are only really a few functions here, but they are important:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span> <span class="n">Agent</span><span class="p">):</span>
+</pre></div>
+
+<p>The write function allows agents to change aspects of their environment.  It takes in c, which is unique ID of the target chunk being changed, and Agent, which refers to the Agent's name.  If the environment can find an object matching c, it will replace its .ID attribute with the Agent's .ID attribute.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">startGame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
+</pre></div>
+
+<p>This initiates the environment update loop, which invokes each Agent's SortProductions() methods, until the board is full, or its counter passes <strong>n</strong>, which defaults to 50.</p>
+
+<h4>
+<a name="chunks-module" class="anchor" href="#chunks-module"><span class="octicon octicon-link"></span></a>Chunks Module</h4>
+
+<p>The chunk system is an integral part of data for the Tic Tac Toe production system.  Chunks are classes meant to store units of string-based information, with relational data as well.  Within the Chunks module exist three different kinds of chunks : Chunk, and its derivatives, Chunk1, Chunk2, and Chunk3.</p>
+
+<p>Chunks
+These represent a single unit of information.  These should be used for any simple information, such as a number.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">Chunk</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+<p>ID refers to some unique identifier of the chunk system, and activation is an integer meant to capture how activated something is.  It should be noted that this has one method, which is descendents also share:</p>
+
+<div class="highlight highlight-python"><pre><span class="n">addToActivation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">)</span>
+</pre></div>
+
+<p>This allows for chunks to be activated in various ways.  Perhaps to show how 'active' a memory is.  It always keeps the number between 0 and 1.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">Chunk1</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">thingX</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+
+<p>Chunk1 (inherits from Chunk)
+These are bits of memory with only one part.  They require an ID, a thingX, and an activation.  You may notice that it takes an <strong>agent</strong> parameter, which can effectively link agents to this unit of information.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">Chunk2</span><span class="p">(</span> <span class="n">ID</span><span class="p">,</span> <span class="n">thingX</span><span class="p">,</span><span class="n">thingY</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+
+<p>Chunk2 (inherits from Chunk)
+These are similar to Chunk1s, but they have an additional variable, a 'thingY'.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">Chunk3</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">thingX</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="n">thingY</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+
+<p>Chunk3 (inherits from Chunk)
+These have a variety of attributes, which can be used for virtually anything.  However, the last attribute should remain activation, for simplicity's sake.</p>
+
+<h3>
+<a name="suggested-variables" class="anchor" href="#suggested-variables"><span class="octicon octicon-link"></span></a>Suggested Variables</h3>
+
+<p>The tic-tac-toe examples comes with abundant examples of variables, which can greatly ease the definition of productions.</p>
+
+<p>Of course, the variables may be renamed, but this is the suggested naming convention:</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="n">BECOMES</span> <span class="o">=</span> <span class="s">'='</span>
+<span class="n">IS</span> <span class="o">=</span> <span class="s">'=='</span>
+<span class="n">ADDED2</span> <span class="o">=</span> <span class="s">'{0}.append({1})'</span>
+<span class="n">nothing</span> <span class="o">=</span> <span class="s">'""'</span>
+<span class="n">empty</span> <span class="o">=</span> <span class="s">'[]'</span>
+<span class="n">zero</span> <span class="o">=</span> <span class="s">'0'</span>
+<span class="n">one</span> <span class="o">=</span> <span class="s">'1'</span>
+
+
+<span class="n">goal</span><span class="o">=</span><span class="s">'self.agent.goal'</span>
+<span class="n">subgoal</span><span class="o">=</span><span class="s">'self.agent.subgoal'</span>
+<span class="n">focus</span><span class="o">=</span><span class="s">'self.agent.focus'</span>
+<span class="n">view</span> <span class="o">=</span> <span class="s">'self.agent.view'</span>
+<span class="n">is_string</span> <span class="o">=</span> <span class="s">'isinstance(self.agent.focus[-1:],str)'</span>
+<span class="n">check_rows</span> <span class="o">=</span> <span class="s">'"check rows"'</span>
+<span class="n">subfocus</span> <span class="o">=</span> <span class="s">'self.agent.sub_focus'</span>
+
+
+<span class="n">move</span> <span class="o">=</span> <span class="s">'self.agent.effector'</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="s">'"start"'</span>
+<span class="n">assess</span> <span class="o">=</span> <span class="s">'"assess"'</span>
+<span class="n">wait</span> <span class="o">=</span> <span class="s">'"wait"'</span>
+
+<span class="n">check_rows</span> <span class="o">=</span> <span class="s">'"check rows"'</span>
+<span class="n">find_blank</span> <span class="o">=</span> <span class="s">'"find blank"'</span>
+
+<span class="n">search2</span> <span class="o">=</span> <span class="s">'self.agent.search({0}, {1})'</span>
+<span class="n">search3</span> <span class="o">=</span> <span class="s">'self.agent.search({0}, {1}, {2})'</span>
+<span class="n">search4</span> <span class="o">=</span> <span class="s">'self.agent.search({0}, {1}, {2}, {3})'</span>
+<span class="n">target1</span> <span class="o">=</span> <span class="s">'self.agent.returnID({0})'</span>
+<span class="n">modify2</span> <span class="o">=</span> <span class="s">'self.e.write({0}, {1})'</span>
+<span class="n">random1</span> <span class="o">=</span> <span class="s">'self.agent.random_choose({0})'</span>
+<span class="n">more_than_zero</span> <span class="o">=</span> <span class="s">'len({0}) &gt; 0'</span>
+<span class="n">assess1</span> <span class="o">=</span> <span class="s">'self.agent.assess({0})'</span>
+<span class="n">strip2</span> <span class="o">=</span> <span class="s">'self.agent.stripChunk({0},{1})'</span>
+
+
+<span class="n">quantify1</span> <span class="o">=</span> <span class="s">'len({0})'</span>
+<span class="n">say1</span>    <span class="o">=</span> <span class="s">'print {0}'</span> 
+<span class="n">world</span> <span class="o">=</span> <span class="s">'self.e.memory'</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="s">'self.agent.memory'</span>
+
+<span class="n">agent1</span> <span class="o">=</span> <span class="s">'self.e.Agent1'</span>
+<span class="n">agent2</span> <span class="o">=</span> <span class="s">'self.e.Agent2'</span>
+<span class="n">agent1goal</span> <span class="o">=</span> <span class="s">'self.e.Agent1.goal'</span>
+<span class="n">agent2goal</span> <span class="o">=</span> <span class="s">'self.e.Agent2.goal'</span>
+
+
+<span class="n">end</span> <span class="o">=</span> <span class="s">'self.e.running = False'</span>
+</pre></div>
+      </section>
+
     </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
