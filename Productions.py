@@ -1,5 +1,6 @@
 class Production():
-    "a production"
+    '''a production meant to hold a single condition >> action pair.  Initialize with 
+    an an agent, environment, [necessary, conditions], [any, actions, to, take]'''
 
     def __init__(self,agent, Environment, Conditions=[],Action=" "):
         '''creates a new production'''
@@ -14,6 +15,8 @@ class Production():
 
         
     def fire(self):
+        '''Fires the right side'''
+        
         for right_side in self.RS:
             try:
                 exec right_side
@@ -35,6 +38,8 @@ class Production():
                 print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, t, right_side)
                 
     def askLS(self):
+        '''Determines whether left-side condition is currently true.  Takes it from global LS'''
+        
         activation=True
         for item in self.LS:
             exec "b= bool("+item+")"

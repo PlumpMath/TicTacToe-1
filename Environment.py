@@ -1,6 +1,7 @@
 from Grid import *
 
 class Environment():
+    '''Environment class for production system.  Requires two agents at the moment.'''
 
     def __init__(self,Agent1, Agent2, chunk_display=[]):
         self.Agent1 = Agent1
@@ -26,25 +27,10 @@ class Environment():
                 
             else:
                 pass
-                
-        #self.printBoard()
-        
-                #Agent.focus = []
-                #Agent.effector = ''
-                #Agent.focus.append(c)
-                
-        # self.switchTurns(Agent)
-        #self.printBoard()
-        
-    # def switchTurns(self, Agent):
-#         '''Switches which agent is able to play.'''
-#         if Agent.ID == self.Agent1.ID:
-#             self.Agent2.goal = "start"
-#         elif Agent.ID == self.Agent2.ID:
-#             self.Agent1.goal = "start"
 
     def startGame(self, n = 50):
-        #This will be the initialization of the game.
+        '''This will be the initialization of the game.'''
+        
         self.Agent1.goal="start"
         self.Agent2.goal="wait"
         
@@ -53,12 +39,12 @@ class Environment():
             self.Agent2.SortProductions()
             
             self.count += 1
-            self.update()
             
         else:
             print "End of production"
 
     def printBoard (self):
+        '''displays board every update'''
         
         if self.grid:
             self.grid.update(self.chunk_display)
@@ -66,11 +52,3 @@ class Environment():
             
         else:
             pass
-                    
-    def update(self):
-        '''update will change all chunks in agents to match the environment'''
-        #for item in self.memory:
-            #self.Agent1.alterChunk(item.ID,item.thingX)
-            #self.Agent2.alterChunk(item.ID,item.thingX)
-        #self.printBoard()
-        

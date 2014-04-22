@@ -166,8 +166,7 @@ x_08  =  Production(P1,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 x_02  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + BECOMES + find_blank ])
 x_03  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank],  [focus + BECOMES + search2.format(world, '"_"'), subgoal + BECOMES + '"quantify"' ])
 x_04  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantify"', more_than_zero.format(focus)],
-                                                                                        [say1.format('"focus:"'), 
-                                                                                        say1.format(quantify1.format(focus)),
+                                                                                        [say1.format(quantify1.format(focus)),
                                                                                         subgoal + BECOMES + '"randomly choose"'])
 
 #If its supposed to randomly choose, put your mark there.                                                                                        
@@ -189,22 +188,18 @@ o_08  =  Production(P2,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 o_02  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + nothing],    [subgoal + BECOMES + find_blank ])
 o_03  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + find_blank],  [focus + BECOMES + search2.format(world, '"_"'), subgoal + BECOMES + '"quantify"' ])
 o_04  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantify"', more_than_zero.format(focus)],
-                                                                                        [say1.format('"focus:"'), 
-                                                                                        say1.format(quantify1.format(focus)),
+                                                                                        [say1.format(quantify1.format(focus)),
                                                                                         subgoal + BECOMES + '"methodically choose"'])
 
 #If its supposed to methodically choose, put your mark there.                                                                                        
 o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"methodically choose"'],
-
                                     [subfocus + BECOMES + strip2.format(focus, "'ID'"),
-                                    say1.format(subfocus),
                                     move + BECOMES + assess1.format(subfocus),
-                                    say1.format(move),
                                     modify2.format(move, agent2),
                                     
                                     #Now clear things
                                     goal + BECOMES + wait,
-                                    agent1goal + BECOMES + start,])
+                                    agent1goal + BECOMES + start])
                                     
 
 #Check to see if game is over.

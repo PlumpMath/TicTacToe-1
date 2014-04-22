@@ -150,6 +150,7 @@ class Agent():
         return utility
 
     def assess(self,aList):
+        '''Returns the most optimal value for the board'''
 
         print aList
         '''aList is a list of ID strings(ex."s1")'''
@@ -234,12 +235,10 @@ class Agent():
             
             for attributes in all_attributes:
                 candidate = getattr(chunk, attributes)
-                #print "candidate",candidate
                 
                 for a in args:
                     if (str(a) in str(candidate)) and ("__" not in str(candidate)): #We want to filter out the __builtin__ stuff. 
                         matched.append(a)
-                        #print a, "===================== matches to ====================", candidate, matched
                     else:
                         pass
             
@@ -263,6 +262,8 @@ class Agent():
         
             
     def SortProductions(self):
+        '''Evaluates the truth conditions of all agent productions'''
+        
         if self.goal != "End":
             high=0
             FireNext=None
@@ -283,7 +284,7 @@ class Agent():
             return
 
     def alterChunk(self,ID,newInput):
-        #finds an existing 'has_$' chunk and overrides it with new data
+        '''finds an existing 'has_$' chunk and overrides it with new data'''
         for idea in self.memory:
             if idea.thingX==ID and idea.relation=="has_$":
                 idea.thingY=newInput
