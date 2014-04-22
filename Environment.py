@@ -21,6 +21,7 @@ class Environment():
         for item in self.memory:
             if item.ID==c:
                 item.thingX=Agent.ID
+                
                 self.printBoard()
                 
             else:
@@ -51,7 +52,6 @@ class Environment():
             self.Agent1.SortProductions()
             self.Agent2.SortProductions()
             
-            
             self.count += 1
             self.update()
             
@@ -69,8 +69,8 @@ class Environment():
                     
     def update(self):
         '''update will change all chunks in agents to match the environment'''
-        for item in self.memory:
-            self.Agent1.alterChunk(item.ID,item.thingX)
-            self.Agent2.alterChunk(item.ID,item.thingX)
+        #for item in self.memory:
+            #self.Agent1.alterChunk(item.ID,item.thingX)
+            #self.Agent2.alterChunk(item.ID,item.thingX)
         #self.printBoard()
         

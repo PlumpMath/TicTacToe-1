@@ -159,7 +159,7 @@ agent2goal = 'self.e.Agent2.goal'
 end = 'self.e.running = False'
 
 #And now actual productions.  First player 1.
-x_01  =  Production(P1,   TTT,    [goal + IS + start], [goal + BECOMES + assess])
+x_01  =  Production(P1,   TTT,    [goal + IS + start], [goal + BECOMES + assess, subgoal + BECOMES + nothing])
 x_08  =  Production(P1,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 
 #Look for any blank and randomly choose it.
@@ -182,7 +182,7 @@ x_05  =  Production(P1,   TTT,    [goal + IS + assess,  subgoal + IS + '"randoml
 
                   
 #Now player 2
-o_01  =  Production(P2,   TTT,    [goal + IS + start], [goal + BECOMES + assess])
+o_01  =  Production(P2,   TTT,    [goal + IS + start], [goal + BECOMES + assess, subgoal + BECOMES + nothing])
 o_08  =  Production(P2,   TTT,    [goal + IS + wait],  [goal + BECOMES + wait])
 
 #Look for any blank and randomly choose it.
@@ -197,15 +197,19 @@ o_04  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantif
 o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"methodically choose"'],
 
                                     [subfocus + BECOMES + strip2.format(focus, "'ID'"),
+                                    say1.format(subfocus),
                                     move + BECOMES + assess1.format(subfocus),
-                                    modify2.format(subfocus, agent2),
-                                    subfocus + BECOMES + empty,
+                                    say1.format(move),
+                                    modify2.format(move, agent2),
+                                    
+                                    #Now clear things
                                     goal + BECOMES + wait,
                                     agent1goal + BECOMES + start,])
+                                    
 
 #Check to see if game is over.
 o_06  =  Production(P2,   TTT,    [ search3.format(world, '"_"', '"s"') + IS + empty ],    [ end ])
 
 
 #Now, start production.
-TTT.startGame(n=75)
+TTT.startGame(n=100)
