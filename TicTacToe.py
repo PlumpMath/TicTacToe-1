@@ -141,6 +141,8 @@ target1 = 'self.agent.returnID({0})'
 modify2 = 'self.e.write({0}, {1})'
 random1 = 'self.agent.random_choose({0})'
 more_than_zero = 'len({0}) > 0'
+assess1 = 'self.agent.assess({0})'
+strip2 = 'self.agent.stripChunk({0},{1})'
 
 
 quantify1 = 'len({0})'
@@ -189,13 +191,14 @@ o_03  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + find_blan
 o_04  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"quantify"', more_than_zero.format(focus)],
                                                                                         [say1.format('"focus:"'), 
                                                                                         say1.format(quantify1.format(focus)),
-                                                                                        subgoal + BECOMES + '"randomly choose"'])
+                                                                                        subgoal + BECOMES + '"methodically choose"'])
 
-#If its supposed to randomly choose, put your mark there.                                                                                        
-o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"randomly choose"'], 
-                                    [subfocus + BECOMES + random1.format(focus),
-                                    move + BECOMES + target1.format(subfocus),
-                                    modify2.format(move, agent2),
+#If its supposed to methodically choose, put your mark there.                                                                                        
+o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"methodically choose"'],
+
+                                    [subfocus + BECOMES + strip2.format(focus, "'ID'"),
+                                    move + BECOMES + assess1.format(subfocus),
+                                    modify2.format(subfocus, agent2),
                                     subfocus + BECOMES + empty,
                                     goal + BECOMES + wait,
                                     agent1goal + BECOMES + start,])

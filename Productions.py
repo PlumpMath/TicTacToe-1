@@ -31,6 +31,9 @@ class Production():
             except NameError as n:
                 print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, n, right_side)
                 
+            except TypeError as t:
+                print "***\n%s FAILED to execute right side: %s. in %s \n***" % (self.agent.ID, t, right_side)
+                
     def askLS(self):
         activation=True
         for item in self.LS:

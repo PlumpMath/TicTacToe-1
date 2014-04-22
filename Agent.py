@@ -151,6 +151,7 @@ class Agent():
 
     def assess(self,aList):
 
+        print aList
         '''aList is a list of ID strings(ex."s1")'''
         best=None
         utility=0
@@ -165,6 +166,7 @@ class Agent():
                     utility=x
                 else:
                     pass
+        print "Best", best
         return best
 
     def CheckWinLoss(self):
@@ -206,6 +208,17 @@ class Agent():
             #     print attributeType, attributeContains, "Not found"
             #         
         return returnList
+    
+    def stripChunk(self, chunkList, attribute):
+        '''returns a list of chunks' attributes'''
+        returnList = []
+        
+        for chunk in chunkList:
+            attr = getattr(chunk, attribute)
+            returnList.append(attr)
+            
+        return returnList
+        
         
     def search(self, chunkList, *args):
         '''Filters out a list of chunks by arguments.  Takes in a list of chunks, and returns the ones with attributes
@@ -224,7 +237,7 @@ class Agent():
                 #print "candidate",candidate
                 
                 for a in args:
-                    if (str(a) in str(candidate)) and ("__" not in str(candidate)):
+                    if (str(a) in str(candidate)) and ("__" not in str(candidate)): #We want to filter out the __builtin__ stuff. 
                         matched.append(a)
                         #print a, "===================== matches to ====================", candidate, matched
                     else:
@@ -275,3 +288,40 @@ class Agent():
             if idea.thingX==ID and idea.relation=="has_$":
                 idea.thingY=newInput
                 return
+                
+P1=Agent("x")
+
+s1Loc= Chunk3 (P1,"s1@","s1","has_loc",(1,1))
+s2Loc= Chunk3 (P1,"s1@","s2","has_loc",(1,2))
+s3Loc= Chunk3 (P1,"s1@","s3","has_loc",(1,3))
+s4Loc= Chunk3 (P1,"s1@","s4","has_loc",(2,1))
+s5Loc= Chunk3 (P1,"s1@","s5","has_loc",(2,2))
+s6Loc= Chunk3 (P1,"s1@","s6","has_loc",(2,3))
+s7Loc= Chunk3 (P1,"s1@","s7","has_loc",(3,1))
+s8Loc= Chunk3 (P1,"s1@","s8","has_loc",(3,2))
+s9Loc= Chunk3 (P1,"s1@","s9","has_loc",(3,3))
+s1S= Chunk3 (P1,"s1S","s1","has_$","_")
+s2S= Chunk3 (P1,"s2S","s2","has_$","_")
+s3S= Chunk3 (P1,"s3S","s3","has_$","_")
+s4S= Chunk3 (P1,"s4S","s4","has_$","_")
+s5S= Chunk3 (P1,"s5S","s5","has_$","_")
+s6S= Chunk3 (P1,"s6S","s6","has_$","_")
+s7S= Chunk3 (P1,"s7S","s7","has_$","_")
+s8S= Chunk3 (P1,"s8S","s8","has_$","_")
+s9S= Chunk3 (P1,"s9S","s9","has_$","_")
+s1R= Chunk3 (P1,"s1R","s1","has_type","corner")
+s2R= Chunk3 (P1,"s2R","s2","has_type","edge")
+s3R= Chunk3 (P1,"s3R","s3","has_type","corner")
+s4R= Chunk3 (P1,"s4R","s4","has_type","edge")
+s5R= Chunk3 (P1,"s5R","s5","has_type","center")
+s6R= Chunk3 (P1,"s6R","s6","has_type","edge")
+s7R= Chunk3 (P1,"s7R","s7","has_type","corner")
+s8R= Chunk3 (P1,"s8R","s8","has_type","edge")
+R123= Chunk3 (P1,"R123",["s1","s2","s3"],"is_a","Row")
+R456= Chunk3 (P1,"R456",["s4","s5","s6"],"is_a","Row")
+R789= Chunk3 (P1,"R789",["s7","s8","s9"],"is_a","Row")
+C147= Chunk3 (P1,"C147",["s1","s4","s7"],"is_a","Column")
+C258= Chunk3 (P1,"C258",["s2","s5","s8"],"is_a","Column")
+C369= Chunk3 (P1,"C369",["s3","s6","s9"],"is_a","Column")
+D159= Chunk3 (P1,"D159",["s1","s5","s9"],"is_a","Diagonal")
+D357= Chunk3 (P1,"D357",["s3","s5","s7"],"is_a","Diagonal")

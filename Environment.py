@@ -69,8 +69,8 @@ class Environment():
                     
     def update(self):
         '''update will change all chunks in agents to match the environment'''
-        #for item in self.memory:
-            #self.Agent1.alterChunk(item.ID,item.thingX)
-            #self.Agent2.alterChunk(item.ID,item.thingX)
+        for item in self.memory:
+            self.Agent1.alterChunk(item.ID,item.thingX)
+            self.Agent2.alterChunk(item.ID,item.thingX)
         #self.printBoard()
         
