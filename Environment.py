@@ -8,6 +8,7 @@ class Environment():
         self.memory=[]
         self.chunk_display = chunk_display
         self.running = True
+        self.count = 0
         
         self.grid = None
         
@@ -16,15 +17,23 @@ class Environment():
         c is a string (ex. "s3")
         Agent is an Agent instance who is claiming the square
         '''
+        
         for item in self.memory:
             if item.ID==c:
                 item.thingX=Agent.ID
+                self.printBoard()
+                
+            else:
+                pass
+                
+        #self.printBoard()
+        
                 #Agent.focus = []
                 #Agent.effector = ''
                 #Agent.focus.append(c)
                 
         # self.switchTurns(Agent)
-        self.update()
+        #self.printBoard()
         
     # def switchTurns(self, Agent):
 #         '''Switches which agent is able to play.'''
@@ -33,18 +42,21 @@ class Environment():
 #         elif Agent.ID == self.Agent2.ID:
 #             self.Agent1.goal = "start"
 
-    def startGame(self):
+    def startGame(self, n = 50):
         #This will be the initialization of the game.
         self.Agent1.goal="start"
         self.Agent2.goal="wait"
-        count=50
-        while (count > 0) and (self.Agent1.search(self.memory, "_") != []) and (self.running == True):
+        
+        while (self.count < n) and (self.running == True):
             self.Agent1.SortProductions()
             self.Agent2.SortProductions()
             
-            count-=1
             
-        print "End of production"
+            self.count += 1
+            self.update()
+            
+        else:
+            print "End of production"
 
     def printBoard (self):
         
@@ -60,5 +72,5 @@ class Environment():
         #for item in self.memory:
             #self.Agent1.alterChunk(item.ID,item.thingX)
             #self.Agent2.alterChunk(item.ID,item.thingX)
-        self.printBoard()
+        #self.printBoard()
         

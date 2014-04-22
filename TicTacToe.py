@@ -102,7 +102,7 @@ s9 = Chunk3(TTT,'s9', '_', 9, (3, 3), 0.0); TTT.chunk_display.append(s9)
 
 
 #Add display grid for easy viewing.
-TTT.grid = Grid.Grid(3, 3, raw_chunks = TTT.chunk_display[:], display_attr = 'thingX')
+TTT.grid = Grid.Grid(3, 3, raw_chunks = TTT.chunk_display, display_attr = 'thingX')
 
 #First some operators
 BECOMES = '='
@@ -203,5 +203,6 @@ o_05  =  Production(P2,   TTT,    [goal + IS + assess,  subgoal + IS + '"randoml
 #Check to see if game is over.
 o_06  =  Production(P2,   TTT,    [ search3.format(world, '"_"', '"s"') + IS + empty ],    [ end ])
 
+
 #Now, start production.
-TTT.startGame()
+TTT.startGame(n=75)
